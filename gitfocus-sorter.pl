@@ -1,10 +1,10 @@
 #!/usr/bin/env perl
 
-# GitLab to OmniFocus Helper Script
-# gitlab-to-omnifocus-sorter.pl
+# GitFocus Helper Script
+# gitfocus-sorter.pl
 # 
 # By Ryan Dotson
-# 18 December 2019
+# 29 December 2019
 #
 # This script evaluates the web page title and will determine which
 # project the resulting action should be sorted into.
@@ -18,11 +18,12 @@
 # expression (regex) search string. You don't need to understand
 # regex to do this.
 #
-# If your GitLab project is called dev / web / en / support and
-# you want to sort those items into an OmniFocus project called
-# "Support Pages", you could use this:
+# If your GitLab/GitHub project were called
+# content / web / support / en and you want to sort those items
+# into an OmniFocus project called "Support Pages", you could
+# use this:
 #
-#     print "Support Pages" if $page_title =~ m`dev / web / en / support`;
+#     print "Support Pages" if $page_title =~ m`content / web / support / en`;
 #
 # You might try using a search like m`support` but an action
 # could be sorted incorrectly if the word 'support' appears
@@ -36,7 +37,7 @@
 my $page_title = shift;
 
 # Example:
-#     print "PROJECT NAME" if $page_title =~ m`SEARCH STRING`;
+#     print "OMNIFOCUS PROJECT NAME" if $page_title =~ m`SEARCH STRING`;
 
 # Delete the example and add your projects below:
-print "PROJECT NAME" if $page_title =~ m`SEARCH STRING`;
+print "OMNIFOCUS PROJECT NAME" if $page_title =~ m`SEARCH STRING`;

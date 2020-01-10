@@ -1,14 +1,14 @@
 #!/usr/bin/env perl
 
-# GitLab to OmniFocus Helper Script
-# gitlab-to-omnifocus-titler.pl
+# GitFocus Helper Script
+# gitfocus-titler.pl
 # 
 # By Ryan Dotson
 # 18 December 2019
 #
-# This script is called by the 'GitLab to OmniFocus' AppleScript
+# This script is called by the GitFocus AppleScript
 # and is responsible for returning the action title based on
-# the GitLab page title.
+# the GitLab/GitHub page title.
 #
 # You can customise the title by editing line 30 below, which
 # is, by default:
@@ -22,17 +22,21 @@ my $page_title = shift;
 
 # Match the page title against this regular expression
 # which has groups for two items:
-#
-#      title ($1) ↓        ↓ ticket number ($2)
-$page_title =~ /(.+?) \((\W\d+)\)/ig;
+$page_title =~ /
+                (.+?)\s       # title ($1)
+                              # and
+                \(?
+                (\W\d+)       # ticket number ($2)
+                \)?           # parentheses are optional: GitHub
+                /igx;
 
 
-# If both are matched, output the title.
+# If both title and ticket number are matched, output the title.
 if ($1 and $2) {
     print "resolve ❮$2❯ – ‘$1’";
 }
 
 # Otherwise output the string that the AppleScript expects.
 else {
-    print "**NOT GITLAB**";
+    print "**NOT MATCHED**";
 }
